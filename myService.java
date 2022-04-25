@@ -1,3 +1,11 @@
+/**
+ * Найти ошибки в классах, предложить улучшения
+ *
+ * myService - java core;
+ * TariffEntity - Hibernate;
+ * TariffRepository - JPA.
+ */
+
 @Component
 public class myService {
 
