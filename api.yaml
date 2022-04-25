@@ -1,0 +1,67 @@
+swagger: '2.0'
+info:
+  version: "2"
+  title: restApi
+  description: "рест api"
+paths:
+  /restApi/getAllCars:
+    post:
+      tags:
+        - Cars
+      produces:
+        - application/json
+      description: Получить все машины
+      parameters:
+        - in: body
+          description: Ответы на вопросы
+          name: request
+          schema:
+            $ref: '#/definitions/NameRequests'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Cars'
+
+definitions:
+  Cars:
+    type: object
+    description: Продуктовое предложение
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Идентификатор
+      name:
+        type: string
+        description: Название предложения
+      comment:
+        type: string
+        description: Комментарий
+    required:
+      - name
+
+  NameRequests:
+    type: object
+    description: Ответы на вопросы
+    properties:
+      answers:
+        type: array
+        items:
+          $ref: '#/definitions/CarRequest'
+        description: Ответы на вопросы
+
+  CarRequest:
+    type: object
+    description: Ответы на вопросы
+    properties:
+      carId:
+        type: integer
+        format: int64
+        description: Идентификатор вопроса
+      testId:
+        type: integer
+        format: int64
+        description: Идентификатор ответа на вопрос
+    required:
+      - carId
