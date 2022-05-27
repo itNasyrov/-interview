@@ -21,7 +21,7 @@ public class myService {
 
             content.replaceAll(".", ",");
 
-        delete(content);
+            delete(content);
     }
 
     private int delete(String content) {
