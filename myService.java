@@ -6,6 +6,7 @@
  * TariffRepository - JPA.
  */
 
+// ПРИМЕР 1
 @Component
 public class myService {
 
@@ -38,9 +39,10 @@ public class myService {
         return res;
     }
 }
+// КОНЕЦ ПРИМЕРА 1
 
 
-
+// ПРИМЕР 2
 @Data
 @Entity
 @Table(name = "tariffs")
@@ -76,3 +78,4 @@ public interface TariffRepository extends JpaRepository<TariffEntity, Integer> {
     List<ProductEntity> findAllByProductType(Long productTypeId);
 
 }
+// КОНЕЦ ПРИМЕРА 1
