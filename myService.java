@@ -78,4 +78,4 @@ public interface TariffRepository extends JpaRepository<TariffEntity, Integer> {
     List<ProductEntity> findAllByProductType(Long productTypeId);
 
 }
-// КОНЕЦ ПРИМЕРА 1
+// КОНЕЦ ПРИМЕРА 2
