@@ -53,10 +53,10 @@ public class TariffEntity {
     private Long id;
 
     @Column
-    private String code;
+    private String default;
 
     @Column
-    private String name;
+    private String desc;
 
     @Column
     private int count;
