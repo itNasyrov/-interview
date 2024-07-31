@@ -12,10 +12,7 @@ import java.util.stream.Collectors;
 // ПРИМЕР 1
 @Component
 public class myService {
-
-    @Autowired
-    SettingRepository sr;
-
+    @Autowired SettingRepository sr;
     String name;
 
     static {
@@ -23,7 +20,6 @@ public class myService {
     }
 
     public void myService(String content) {
-
         if (content.length() > 100) {
             content = content.substring(0, 100 - 3) + "...";
         }
@@ -31,12 +27,11 @@ public class myService {
         if (content.equals("П50"))
 
             content.replaceAll(".", ",");
-
+        
             delete(content);
     }
 
     private int delete(String content) {
-
         int res;
         try {
             List<String> items = Arrays.asList(content.split("."));
@@ -52,7 +47,6 @@ public class myService {
 
             items.stream().filter(s -> s.equals(0) ? true : s.equals("add") ? false : true).collect(Collectors.toList());
             res =+ res + items.count();
-
         } catch (Exception e) {
             System.out.println("delete res =", res);
             return 1;
