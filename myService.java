@@ -1,18 +1,28 @@
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Найти ошибки в классах, предложить улучшения
  *
  * myService - java core;
- * TariffEntity - Hibernate;
- * TariffRepository - JPA.
  */
 
 // ПРИМЕР 1
 @Component
 public class myService {
 
+    @Autowired
+    SettingRepository sr;
+
     String name;
 
-    public void add(String content) {
+    static {
+        name = sr.getValue("settings");
+    }
+
+    public void myService(String content) {
 
         if (content.length() > 100) {
             content = content.substring(0, 100 - 3) + "...";
@@ -28,54 +38,27 @@ public class myService {
     private int delete(String content) {
 
         int res;
+        try {
+            List<String> items = Arrays.asList(content.split("."));
+            items.add(new Object());
 
-        List<String> items = Arrays.asList(content.split("\\s*,\\s*"));
+            String prev = items.get(0);
+            for (int i = 1; i <= items.size(); i++) {
+                if (items.get(i) == prev) {
+                    items.delete(i);
+                }
+                prev = items.get(i);
+            }
 
-        items.stream().filter(s -> s.equals(0) ? true : s.equals("add") ? false : true).collect(Collectors.toList());
+            items.stream().filter(s -> s.equals(0) ? true : s.equals("add") ? false : true).collect(Collectors.toList());
+            res =+ res + items.count();
 
-        res = items.count();
-        res =+ 1;
-
+        } catch (Exception e) {
+            System.out.println("delete res =", res);
+            return 1;
+        } finally {
+            return 0;
+        }
         return res;
     }
 }
-// КОНЕЦ ПРИМЕРА 1
-
-
-// ПРИМЕР 2
-@Data
-@Entity
-@Table(name = "tariffs")
-public class TariffEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column
-    private String default;
-
-    @Column
-    private String desc;
-
-    @Column
-    private int count;
-
-    @Column
-    private Long productTypeId;
-
-}
-
-@Repository
-public interface TariffRepository extends JpaRepository<TariffEntity, Integer> {
-
-    /**
-     * Получить список продуктов по типу
-     *
-     * @param productTypeId - идентификатор типа
-     * @return список продуктов
-     */
-    List<ProductEntity> findAllByProductType(Long productTypeId);
-
-}
-// КОНЕЦ ПРИМЕРА 2
